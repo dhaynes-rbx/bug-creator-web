@@ -5,14 +5,15 @@ function App() {
   const [bugs, setBugs] = useState(0);
   const [bps, setBps] = useState(0);
   const [upgrades, setUpgrades] = useState([
-    { name: 'Pull Request', cost: 15, cps: 0.1, owned: 0 },
-    { name: 'Push to Master', cost: 100, cps: 1, owned: 0 },
-    { name: 'Zoom Call with Josh', cost: 1100, cps: 10, owned: 0 },
-    { name: 'Merge Conflict', cost: 12000, cps: 100, owned: 0 },
-    { name: 'Code Review', cost: 130000, cps: 1000, owned: 0 },
-    { name: 'Bug Bash', cost: 1400000, cps: 10000, owned: 0 },
-    { name: 'Hackathon', cost: 20000000, cps: 100000, owned: 0},
-    { name: 'Assign to Dustin', cost: 330000000, cps: 1000000, owned: 0},
+    { name: 'Pull Request', cost: 15, bps: 0.4, owned: 0 },
+    { name: 'Push to Master', cost: 50, bps: 4, owned: 0 },
+    { name: 'Zoom Call with Josh', cost: 500, bps: 40, owned: 0 },
+    { name: 'Merge Conflict', cost: 6000, bps: 400, owned: 0 },
+    { name: 'Code Review', cost: 70000, bps: 4000, owned: 0 },
+    { name: 'Bug Bash', cost: 700000, bps: 40000, owned: 0 },
+    { name: 'Hackathon', cost: 10000000, bps: 400000, owned: 0},
+    { name: 'Assign to Dustin', cost: 150000000, bps: 4000000, owned: 0},
+    { name: 'Get a Promotion', cost: 2500000000, bps: 40000000, owned: 0},
   ]);
 
   useEffect(() => {
@@ -23,47 +24,77 @@ function App() {
     return () => clearInterval(timer);
   }, [bps]);
 
+  // ... other state variables ...
+  const [isAnimating, setIsAnimating] = useState(false);
+
   const clickBug = () => {
-    setBugs(prevCookies => prevCookies + 1);
+    setBugs(prevBugs => prevBugs + 1);
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 100); // Reset after animation duration
   };
 
-  const buyUpgrade = (index) => {
+  const buyUpgrade = (index, multiplier) => {
+    //if multiplier is not passed, set it to 1
+    multiplier = multiplier || 1;
+
     const upgrade = upgrades[index];
     if (bugs >= upgrade.cost) {
-      setBugs(prevCookies => prevCookies - upgrade.cost);
-      setBps(prevCps => prevCps + upgrade.cps);
+      setBugs(prevBug => prevBug - upgrade.cost);
+      setBps(prevBps => prevBps + upgrade.bps);
       setUpgrades(prevUpgrades => {
         const newUpgrades = [...prevUpgrades];
         newUpgrades[index] = {
           ...upgrade,
-          owned: upgrade.owned + 1,
-          cost: Math.ceil(upgrade.cost * 1.15),
+          owned: upgrade.owned + 1 * multiplier,
+          cost: Math.ceil(upgrade.cost * 1.075 * multiplier),
         };
         return newUpgrades;
       });
     }
   };
 
+  const isUpgradeVisible = (index) => {
+    if (index === 0) return true;
+    return upgrades[index - 1].owned > 0;
+  };
+
   return (
     <div className="App">
-      <h1>Cookie Clicker</h1>
+      <h1>Bug Clicker</h1>
+      
       <div className="bug-container">
-        <button className="bug" onClick={clickBug}>🪳</button>
+        <button 
+          className={`bug ${isAnimating ? 'animate' : ''}`} 
+          onClick={clickBug}
+        >
+          🪳
+        </button>
       </div>
       <p>Bugs: {Math.floor(bugs)}</p>
       <p>Bugs per second: {bps.toFixed(1)}</p>
       <div className="upgrades">
         <h2>Upgrades</h2>
         {upgrades.map((upgrade, index) => (
-          <button
-            key={upgrade.name}
-            onClick={() => buyUpgrade(index)}
-            disabled={bugs < upgrade.cost}
-          >
-            Buy {upgrade.name} (Owned: {upgrade.owned})
-            <br />
-            Cost: {upgrade.cost} bugs
-          </button>
+          isUpgradeVisible(index) && (
+            <div key={upgrade.name} className="upgrade-row">
+              <button
+                key={upgrade.name}
+                onClick={() => buyUpgrade(index)}
+                disabled={bugs < upgrade.cost}
+              >
+                {upgrade.name} (Owned: {upgrade.owned})
+                <br />
+                Cost: {upgrade.cost} bugs
+              </button>
+              <button
+                key={upgrade.name}
+                onClick={() => buyUpgrade(index, 10)}
+                disabled={bugs < upgrade.cost * 10}
+              >
+                Buy 10
+              </button>
+            </div>
+          )
         ))}
       </div>
     </div>

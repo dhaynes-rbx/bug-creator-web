@@ -12,6 +12,26 @@
   background: none;
   border: none;
   cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.bug.animate {
+  animation: clickAnimation 0.1s ease-in-out;
+}
+
+@keyframes clickAnimation {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.7);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .upgrades {
@@ -20,8 +40,30 @@
   align-items: center;
 }
 
-button {
+.upgrade-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Style for all buttons except the bug button */
+button:not(.bug) {
   margin: 10px;
   padding: 10px;
   font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Hover effect for all buttons except the bug button */
+button:not(.bug):hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+/* Style for disabled buttons */
+button:not(.bug):disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
