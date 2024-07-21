@@ -93,6 +93,13 @@ function App() {
               >
                 Buy 10
               </button>
+              <button
+                key={upgrade.name}
+                onClick={() => buyUpgrade(index, 100)}
+                disabled={bugs < upgrade.cost * 100}
+              >
+                Buy 100
+              </button>
             </div>
           )
         ))}
