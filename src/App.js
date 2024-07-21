@@ -46,7 +46,7 @@ function App() {
         newUpgrades[index] = {
           ...upgrade,
           owned: upgrade.owned + 1 * multiplier,
-          cost: Math.ceil(upgrade.cost * 1.075),
+          cost: Math.ceil(upgrade.cost * 1.075 * multiplier),
         };
         return newUpgrades;
       });
