@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/bug-creator-web/static/css/main.56a7e7c4.css",
-    "main.js": "/bug-creator-web/static/js/main.06d21af0.js",
+    "main.js": "/bug-creator-web/static/js/main.49881b5f.js",
     "static/js/453.1735f5d1.chunk.js": "/bug-creator-web/static/js/453.1735f5d1.chunk.js",
     "index.html": "/bug-creator-web/index.html",
     "main.56a7e7c4.css.map": "/bug-creator-web/static/css/main.56a7e7c4.css.map",
-    "main.06d21af0.js.map": "/bug-creator-web/static/js/main.06d21af0.js.map",
+    "main.49881b5f.js.map": "/bug-creator-web/static/js/main.49881b5f.js.map",
     "453.1735f5d1.chunk.js.map": "/bug-creator-web/static/js/453.1735f5d1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.56a7e7c4.css",
-    "static/js/main.06d21af0.js"
+    "static/js/main.49881b5f.js"
   ]
 }
