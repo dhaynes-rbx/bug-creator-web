@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bug-creator-web/static/css/main.a2615080.css",
+    "main.js": "/bug-creator-web/static/js/main.16af2c0d.js",
+    "static/js/453.1735f5d1.chunk.js": "/bug-creator-web/static/js/453.1735f5d1.chunk.js",
+    "index.html": "/bug-creator-web/index.html",
+    "main.a2615080.css.map": "/bug-creator-web/static/css/main.a2615080.css.map",
+    "main.16af2c0d.js.map": "/bug-creator-web/static/js/main.16af2c0d.js.map",
+    "453.1735f5d1.chunk.js.map": "/bug-creator-web/static/js/453.1735f5d1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2615080.css",
+    "static/js/main.16af2c0d.js"
+  ]
+}
